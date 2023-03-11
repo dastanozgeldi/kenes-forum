@@ -45,17 +45,9 @@ export const RoomItem = ({ room }: RoomItemProps) => {
         )}
         {room.topic && (
           <span
-            className={`${TOPIC} flex items-center gap-2`}
+            className={`${TOPIC} flex items-center`}
             key={room.topicId}
           >
-            {room.topic.image && (
-              <Image
-                alt="Topic"
-                src={room.topic.image}
-                width={16}
-                height={16}
-              />
-            )}
             {room.topic.name}
           </span>
         )}

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { BiLogInCircle } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { HamburgerMenu } from "./MobileMenu";
 import { Logo } from "./Logo";
 import { Avatar } from "components/common/Avatar";
 import { ToggleTheme } from "components/common/ToggleTheme";
@@ -15,7 +14,6 @@ type NavProps = {
 
 export const Nav = ({ mounted, links }: NavProps) => {
   const { data: session } = useSession();
-  const [open, setOpen] = useState(false);
 
   return (
     <nav className="transition border-b border-gray-500 bg-opacity-80 w-full z-10 backdrop-blur flex items-center justify-between px-4 py-2">
@@ -49,15 +47,6 @@ export const Nav = ({ mounted, links }: NavProps) => {
           )}
         </div>
         <ToggleTheme mounted={mounted} />
-        {open && <HamburgerMenu session={session} />}
-        <button
-          aria-label="Hamburger Menu"
-          type="button"
-          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-600 items-center justify-center hover:ring-2 ring-gray-300 transition-all md:hidden flex"
-          onClick={() => setOpen(!open)}
-        >
-          <GiHamburgerMenu />
-        </button>
       </div>
     </nav>
   );

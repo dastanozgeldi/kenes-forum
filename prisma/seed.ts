@@ -19,50 +19,16 @@ async function main() {
   });
   await prisma.topic.createMany({
     data: [
-      {
-        name: "Physics",
-        image: "https://cdn-icons-png.flaticon.com/512/3254/3254075.png",
-      },
-      {
-        name: "Math",
-        image: "https://cdn-icons-png.flaticon.com/512/2072/2072899.png",
-      },
-      {
-        name: "Chemistry",
-        image: "https://cdn-icons-png.flaticon.com/512/995/995446.png",
-      },
-      {
-        name: "Biology",
-        image: "https://cdn-icons-png.flaticon.com/512/2941/2941552.png",
-      },
-      {
-        name: "Geography",
-        image: "https://cdn-icons-png.flaticon.com/512/869/869196.png",
-      },
-      {
-        name: "History",
-        image: "https://cdn-icons-png.flaticon.com/512/2682/2682065.png",
-      },
-      {
-        name: "Computer Science",
-        image: "https://cdn-icons-png.flaticon.com/512/4319/4319162.png",
-      },
-      {
-        name: "Kazakh",
-        image: "https://cdn-icons-png.flaticon.com/512/6211/6211443.png",
-      },
-      {
-        name: "Russian",
-        image: "https://cdn-icons-png.flaticon.com/512/4628/4628645.png",
-      },
-      {
-        name: "English",
-        image: "https://cdn-icons-png.flaticon.com/512/197/197374.png",
-      },
-      {
-        name: "Art",
-        image: "https://cdn-icons-png.flaticon.com/512/2970/2970785.png",
-      },
+      { name: "Oncology" },
+      { name: "Neurology" },
+      { name: "Dermatology" },
+      { name: "Orthodontology" },
+      { name: "Anesthesiology" },
+      { name: "Cardiology" },
+      { name: "Dentistry" },
+      { name: "Traumatology" },
+      { name: "Pharmacy" },
+      { name: "Primary Cares" },
     ],
     skipDuplicates: true,
   });
@@ -72,8 +38,9 @@ async function main() {
     },
     create: {
       id: firstPostId,
-      title: "CMS vs WYSIWYG",
-      description: "what's the difference? :/",
+      title: "How is cancer pain managed?",
+      description:
+        "I know that for a tumor that causes pain, removing or destroying all or part of the tumor with chemotherapy or radiation can help. But what medicine should be taken?",
       userId: testUserId,
     },
     update: {},

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineDown } from "react-icons/ai";
 import { trpc } from "utils/trpc";
@@ -25,17 +24,7 @@ export const Topics = () => {
               href={`/feed/?topicId=${t.id}`}
               className="flex items-center justify-between"
             >
-              <div className="flex items-center">
-                {t.image && (
-                  <Image
-                    alt="topic image"
-                    src={t.image}
-                    width={24}
-                    height={24}
-                  />
-                )}
-                <span className="text-xl p-2">{t.name}</span>
-              </div>
+              <span className="text-xl p-2">{t.name}</span>
               <span className="text-xl px-2 rounded bg-gray-100 dark:bg-gray-800">
                 {t.rooms.length}
               </span>

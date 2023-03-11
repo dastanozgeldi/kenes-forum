@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Nav } from "./Nav";
 import { Poppins } from "@next/font/google";
+import { Sidebar } from "./Sidebar";
+import { FaSuitcase, FaHome, FaVideo } from "react-icons/fa";
 
 export const poppins = Poppins({
   variable: "--font-poppins",
@@ -12,9 +13,9 @@ export const poppins = Poppins({
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
   const links = [
-    { label: "Feed", href: "/feed" },
-    { label: "Workspace", href: "/workspace" },
-    { label: "News", href: "/news" },
+    { label: "Feed", href: "/feed", icon: <FaHome /> },
+    { label: "Workspace", href: "/workspace", icon: <FaSuitcase /> },
+    { label: "Consiliums", href: "/consiliums", icon: <FaVideo /> },
   ];
 
   const [parent] = useAutoAnimate<HTMLDivElement>();
@@ -42,10 +43,14 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
         <title>Kenes - Diagnose Efficiently</title>
       </Head>
       <div className={poppins.className}>
-        <Nav mounted={mounted} links={links} />
-        <main ref={parent} className="p-4 sm:container mx-auto">
-          {children}
-        </main>
+        <div className="flex">
+          <div className="fixed w-1/5 border-r border-r-gray-600">
+            <Sidebar mounted={mounted} links={links} />
+          </div>
+          <main ref={parent} className="w-full ml-[20%] p-4 mx-auto">
+            {children}
+          </main>
+        </div>
       </div>
     </>
   );

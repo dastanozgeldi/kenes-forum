@@ -5,7 +5,6 @@ import { publicProcedure, router } from "../trpc";
 const defaultTopicSelect = Prisma.validator<Prisma.TopicSelect>()({
   id: true,
   name: true,
-  image: true,
   createdAt: true,
   rooms: true,
 });
