@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  @apply bg-bg dark:bg-darkBg flex flex-col min-h-screen;
+}
+
+* {
+  @apply font-sans;
+}
+
+b {
+  @apply text-secondary;
+}
+
+p {
+  @apply my-2;
+}
