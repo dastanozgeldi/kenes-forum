@@ -1,5 +1,5 @@
 import Image from "next/image";
-import defaultAvatar from "assets/images/default-avatar.png";
+import defaultAvatar from "assets/default-avatar.png";
 
 type AvatarProps = { src?: string | null; size: number };
 

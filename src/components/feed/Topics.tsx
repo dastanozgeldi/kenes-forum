@@ -11,14 +11,14 @@ export const Topics = () => {
       <ul>
         <Link
           href="/"
-          className="flex items-center justify-between my-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:duration-300"
+          className="flex items-center justify-between my-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
         >
           <span className="text-xl p-2">All</span>
         </Link>
         {data?.map((t) => (
           <li
             key={t.id}
-            className="my-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:duration-300"
+            className="my-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
           >
             <Link
               href={`?topicId=${t.id}`}
@@ -33,7 +33,7 @@ export const Topics = () => {
         ))}
         <Link
           href="/topics"
-          className="w-max flex items-center gap-2 text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:duration-500 px-4 py-2 rounded-lg"
+          className="w-max flex items-center gap-2 text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-500 px-4 py-2 rounded-lg"
         >
           More <AiOutlineDown size={16} />
         </Link>
