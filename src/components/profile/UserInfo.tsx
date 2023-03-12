@@ -8,14 +8,13 @@ import { MdForum } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import { EditProfile } from "./EditProfile";
+import { styles } from "styles";
+import clsx from "clsx";
 
 type InfoProps = {
   user?: (User & any) | null;
   session: Session | null;
 };
-
-export const PROFILE =
-  "border-[1px] border-gray-700 gap-2 w-[100px] h-[100px] flex flex-col items-center justify-center rounded-[10px] text-xl";
 
 export const UserInfo = ({ user, session }: InfoProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,18 +49,18 @@ export const UserInfo = ({ user, session }: InfoProps) => {
       {/* General Info */}
       <div className="flex items-center justify-between my-4 gap-2">
         {user?.school && (
-          <div className={`${PROFILE} text-center`}>
+          <div className={clsx(styles.profile, "text-center")}>
             <IoSchool className="w-7 h-7" />
             {user.school.name}
           </div>
         )}
         {user?.grade && (
-          <div className={PROFILE}>
+          <div className={styles.profile}>
             <IoPerson className="w-7 h-7" />
             {user.grade}
           </div>
         )}
-        <div className={PROFILE}>
+        <div className={styles.profile}>
           <MdForum className="w-7 h-7" />
           {user?.Room.length}
         </div>

@@ -11,4 +11,7 @@ export const styles = {
   select:
     "my-1 w-full bg-transparent outline outline-[1px] outline-gray-500 rounded p-2",
   notification: "border-[1px] border-gray-700 my-4 rounded-xl px-8 py-4",
+
+  profile:
+    "border-[1px] border-gray-700 gap-2 w-[100px] h-[100px] flex flex-col items-center justify-center rounded-[10px] text-xl",
 };

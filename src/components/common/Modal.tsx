@@ -1,4 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
+import clsx from "clsx";
 import { poppins } from "layouts/Layout";
 import {
   type Dispatch,
@@ -15,7 +16,11 @@ type ModalProps = PropsWithChildren & {
 
 export const Modal = ({ children, title, isOpen, setIsOpen }: ModalProps) => (
   <Transition appear show={isOpen} as={Fragment}>
-    <Dialog as="div" className={`relative z-10 ${poppins.className}`} onClose={() => setIsOpen(false)}>
+    <Dialog
+      as="div"
+      className={clsx(poppins.className, "relative z-10")}
+      onClose={() => setIsOpen(false)}
+    >
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-300"

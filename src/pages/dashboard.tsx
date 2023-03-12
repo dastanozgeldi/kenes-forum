@@ -13,7 +13,7 @@ const Dashboard = () => {
   return (
     <Page
       title="Profile"
-      className="xl:grid xl:grid-cols-3 xl:justify-items-center"
+      className="max-w-[60ch] mx-auto xl:max-w-none xl:grid xl:grid-cols-3 xl:justify-items-center"
     >
       <div className="w-full xl:px-4">
         <UserInfo user={user} session={session} />

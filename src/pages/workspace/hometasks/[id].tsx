@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { EditHometask } from "components/hometasks/EditHometask";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -25,9 +26,10 @@ const HometaskView = () => {
       {/* Header */}
       <div className="border-b py-2 mb-4">
         <h1
-          className={`text-4xl font-bold ${
+          className={clsx(
+            "text-4xl font-bold",
             hometask.finished && "line-through"
-          }`}
+          )}
         >
           {hometask.title}
         </h1>

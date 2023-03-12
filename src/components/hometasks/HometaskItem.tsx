@@ -12,7 +12,7 @@ export const HometaskItem = ({ hometask }: HometaskItemProps) => (
     <div className="w-full">
       <Link
         href={`/workspace/hometasks/${hometask.id}`}
-        className={`text-xl ${hometask.finished && "line-through"}`}
+        className={clsx("text-xl", hometask.finished && "line-through")}
       >
         {hometask.title}
       </Link>
