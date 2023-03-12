@@ -1,13 +1,14 @@
 import type { Topic, Hometask, User } from "@prisma/client";
+import clsx from "clsx";
 import Link from "next/link";
-import { CARD } from "styles";
+import { styles } from "styles";
 
 type HometaskItemProps = {
   hometask: Hometask & { user: User; topic: Topic };
 };
 
 export const HometaskItem = ({ hometask }: HometaskItemProps) => (
-  <div className={`${CARD} my-4`}>
+  <div className={clsx(styles.card, "my-4")}>
     <div className="w-full">
       <Link
         href={`/workspace/hometasks/${hometask.id}`}

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { type Session } from "next-auth";
-import { ACTION_BUTTON, NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 import { IoAdd } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { RoomItem } from "components/rooms/RoomItem";
 import { NewRoom } from "./NewRoom";
+import clsx from "clsx";
 
 type RoomSectionProps = { session: Session | null };
 
@@ -42,7 +43,7 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
         {session && (
           <>
             <button
-              className={`${ACTION_BUTTON} flex items-center gap-2`}
+              className={clsx(styles.actionButton, "flex items-center gap-2")}
               onClick={() => setIsOpen(true)}
             >
               <IoAdd className="w-6 h-6" /> Add Room
@@ -56,12 +57,12 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
         page.items.length > 0 ? (
           page.items.map((item) => <RoomItem key={item.id} room={item} />)
         ) : (
-          <p className={NOTIFICATION}>No rooms found for this.</p>
+          <p className={styles.notification}>No rooms found for this.</p>
         )
       )}
       {/* Pagination */}
       <button
-        className={ACTION_BUTTON}
+        className={styles.actionButton}
         onClick={() => roomsQuery.fetchPreviousPage()}
         disabled={
           !roomsQuery.hasPreviousPage || roomsQuery.isFetchingPreviousPage

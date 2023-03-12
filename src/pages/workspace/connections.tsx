@@ -4,7 +4,7 @@ import { Workspace } from "layouts/Workspace";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type ConnectionItemProps = {
@@ -43,7 +43,9 @@ const Connections = () => {
   return (
     <Workspace>
       <div className="w-full">
-        <h1 className={NOTIFICATION}>Here are people from your school.</h1>
+        <h1 className={styles.notification}>
+          Here are people from your school.
+        </h1>
         <div className="w-full">
           {connections?.map((connection) => (
             <ConnectionItem connection={connection} />

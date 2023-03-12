@@ -1,8 +1,8 @@
 import { type Room } from "@prisma/client";
-import Image from "next/image";
+import clsx from "clsx";
 import Link from "next/link";
 import { IoPeople } from "react-icons/io5";
-import { TOPIC } from "styles";
+import { styles } from "styles";
 import { Avatar } from "../common/Avatar";
 
 type RoomItemProps = {
@@ -38,14 +38,14 @@ export const RoomItem = ({ room }: RoomItemProps) => {
       <p className="text-gray-400">{room.description}</p>
       <div className="my-2 flex justify-between">
         {room.participants && (
-          <span className={`${TOPIC} flex items-center gap-2`}>
+          <span className={clsx(styles.topic, "flex items-center gap-2")}>
             <IoPeople className="w-5 h-5" />
             {room.participants.length} participants
           </span>
         )}
         {room.topic && (
           <span
-            className={`${TOPIC} flex items-center`}
+            className={clsx(styles.topic, "flex items-center")}
             key={room.topicId}
           >
             {room.topic.name}

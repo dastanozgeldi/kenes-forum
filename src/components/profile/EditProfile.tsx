@@ -3,7 +3,7 @@ import { Modal } from "components/common/Modal";
 import { useSession } from "next-auth/react";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { INPUT_SELECT, INPUT_TEXT, TEXTAREA } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type FormData = {
@@ -69,7 +69,7 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
             {...register("username")}
             id="username"
             type="text"
-            className={INPUT_SELECT}
+            className={styles.input}
             value={username || ""}
             onChange={(e) => setUsername(e.currentTarget.value)}
           />
@@ -82,7 +82,7 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
           <select
             {...register("schoolId")}
             id="schoolId"
-            className={INPUT_SELECT}
+            className={styles.select}
             onChange={(e) => setSchoolId(e.currentTarget.value)}
           >
             <option selected>Choose a school</option>
@@ -102,7 +102,7 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
           <input
             id="grade"
             {...register("grade")}
-            className={INPUT_TEXT}
+            className={styles.input}
             value={grade || ""}
             onChange={(e) => setGrade(e.currentTarget.value)}
             disabled={editProfile.isLoading}
@@ -117,7 +117,7 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
           <textarea
             id="bio"
             {...register("bio")}
-            className={TEXTAREA}
+            className={styles.textarea}
             value={bio || ""}
             onChange={(e) => setBio(e.currentTarget.value)}
             disabled={editProfile.isLoading}

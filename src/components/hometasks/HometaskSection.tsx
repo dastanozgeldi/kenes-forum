@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import { useState } from "react";
-import { ACTION_BUTTON, NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 import { HometaskItem } from "./HometaskItem";
 import { NewHometask } from "./NewHometask";
@@ -15,12 +16,12 @@ export const HometaskSection = () => {
 
   return (
     <div>
-      <h1 className={NOTIFICATION}>
+      <h1 className={styles.notification}>
         Hometasks. Here are your most recent things to do.
       </h1>
       <button
         onClick={() => setIsOpen(true)}
-        className={`${ACTION_BUTTON} w-full`}
+        className={clsx(styles.actionButton, "w-full")}
       >
         Add Hometask
       </button>
@@ -29,12 +30,12 @@ export const HometaskSection = () => {
         page.items.length > 0 ? (
           page.items.map((hometask) => <HometaskItem hometask={hometask} />)
         ) : (
-          <p className={NOTIFICATION}>No hometasks yet.</p>
+          <p className={styles.notification}>No hometasks yet.</p>
         )
       )}
       {/* Pagination */}
       <button
-        className={ACTION_BUTTON}
+        className={styles.actionButton}
         onClick={() => hometasksQuery.fetchPreviousPage()}
         disabled={
           !hometasksQuery.hasPreviousPage ||

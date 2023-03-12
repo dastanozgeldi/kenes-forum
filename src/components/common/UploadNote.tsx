@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import { type FormEvent, useRef, useState } from "react";
-import { ACTION_BUTTON, INPUT_TEXT } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 import { Modal } from "./Modal";
 
@@ -77,7 +78,7 @@ export const UploadNote = ({ className = "" }: UploadNoteProps) => {
     <>
       {/* The button to open modal */}
       <button
-        className={`${ACTION_BUTTON} ${className}`}
+        className={clsx(styles.actionButton, className)}
         onClick={() => setIsOpen(true)}
       >
         Upload Note
@@ -91,14 +92,17 @@ export const UploadNote = ({ className = "" }: UploadNoteProps) => {
           <input ref={fileRef} type="file" onChange={(e) => selectFile(e)} />
           <div className="flex items-center gap-3">
             {file && (
-              <button type="submit" className={`${ACTION_BUTTON} my-2`}>
+              <button
+                type="submit"
+                className={clsx(styles.actionButton, "my-2")}
+              >
                 Upload a File!
               </button>
             )}
             {uploadingStatus && <p>{uploadingStatus}</p>}
           </div>
           <input
-            className={INPUT_TEXT}
+            className={styles.input}
             onChange={(e) => setNote({ ...note, name: e.target.value })}
             value={file?.name}
           />

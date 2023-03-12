@@ -3,18 +3,20 @@ import NextError from "next/error";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { ACTION_BUTTON, CARD } from "styles";
+import { styles } from "styles";
 import { Page } from "layouts/Page";
 import { EditRoom } from "components/rooms/EditRoom";
 import { Avatar } from "components/common/Avatar";
 import { trpc } from "utils/trpc";
 import { env } from "env/client.mjs";
+import { Messages } from "components/rooms/Messages";
+import clsx from "clsx";
 
 const Participants = ({ roomId }: { roomId: string }) => {
   const { data: participants } = trpc.participant.all.useQuery({ roomId });
 
   return (
-    <div className={`${CARD} my-2`}>
+    <div className={clsx(styles.card, "my-2")}>
       <h1 className="my-2 text-2xl font-semibold text-center">
         Participants - {participants?.length}
       </h1>
@@ -88,13 +90,13 @@ const SentNotes = ({ roomId, userId }: { roomId: string; userId: string }) => {
   };
 
   return (
-    <div className={`${CARD} my-2`}>
+    <div className={clsx(styles.card, "my-2")}>
       <h1 className="my-2 text-2xl font-semibold text-center">
         Notes Sent - {notesQuery.data?.length}
       </h1>
       {notesQuery.data?.map((note) => (
         <a
-          className={`${CARD} m-2 w-full text-left`}
+          className={clsx(styles.card, "m-2, w-full text-left")}
           href={`${env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/notes/${userId}/${note.id}`}
         >
           {note.filename}
@@ -107,7 +109,7 @@ const SentNotes = ({ roomId, userId }: { roomId: string; userId: string }) => {
       >
         <input ref={fileRef} type="file" onChange={(e) => selectFile(e)} />
         {file && (
-          <button type="submit" className={`${ACTION_BUTTON} my-2`}>
+          <button type="submit" className={clsx(styles.actionButton, "my-2")}>
             Upload a File!
           </button>
         )}
@@ -156,6 +158,7 @@ const ViewRoom = () => {
           router={router}
         />
         <SentNotes roomId={room.id} userId={session?.user?.id as string} />
+        <Messages roomId={room.id} session={session} />
       </div>
     </Page>
   );

@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import { RoomItem } from "components/rooms/RoomItem";
-import { NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 export const PinnedRooms = () => {
@@ -8,7 +9,7 @@ export const PinnedRooms = () => {
   return (
     <div className="my-4">
       {/* Notification */}
-      <h1 className={`${NOTIFICATION} mt-0 text-center`}>
+      <h1 className={clsx(styles.notification, "mt-0 text-center")}>
         This is the profile page. Here you can see some general information
         about a user.
       </h1>
@@ -19,7 +20,7 @@ export const PinnedRooms = () => {
             <RoomItem key={item.room.id} room={item.room} />
           ))
         ) : (
-          <p className={NOTIFICATION}>No pinned rooms.</p>
+          <p className={styles.notification}>No pinned rooms.</p>
         )}
       </ul>
     </div>

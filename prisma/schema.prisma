@@ -86,7 +86,7 @@ model Room {
     notes        Note[]
     pinnedRooms  PinnedRoom[]
     isPinned     Boolean               @default(false)
-    messages      Message[]
+    messages     Message[]
 }
 
 model School {
@@ -141,7 +141,7 @@ model User {
     hometasks     Hometask[]
     notes         Note[]
     pinnedRooms   PinnedRoom[]
-    messages       Message[]
+    messages      Message[]
 }
 
 model VerificationToken {

@@ -3,7 +3,7 @@ import { Modal } from "components/common/Modal";
 import type { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ACTION_BUTTON, DELETE_BUTTON, INPUT_SELECT, INPUT_TEXT } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type EditHometaskProps = {
@@ -84,16 +84,19 @@ export const EditHometask = ({
         {userId === hometask?.userId && (
           <>
             <button
-              className={ACTION_BUTTON}
+              className={styles.actionButton}
               onClick={() => finishHometask.mutate({ id })}
             >
               Finish
             </button>
-            <button className={ACTION_BUTTON} onClick={() => setIsOpen(true)}>
+            <button
+              className={styles.actionButton}
+              onClick={() => setIsOpen(true)}
+            >
               Edit
             </button>
             <button
-              className={DELETE_BUTTON}
+              className={styles.deleteButton}
               onClick={() => deleteHometask.mutate({ id })}
             >
               Delete
@@ -111,7 +114,7 @@ export const EditHometask = ({
             <input
               id="title"
               {...register("title")}
-              className={INPUT_TEXT}
+              className={styles.input}
               value={title}
               onChange={(e) => setTitle(e.currentTarget.value)}
               disabled={editHometask.isLoading}
@@ -125,7 +128,7 @@ export const EditHometask = ({
             <input
               id="content"
               {...register("content")}
-              className={INPUT_TEXT}
+              className={styles.input}
               value={content}
               onChange={(e) => setDescription(e.currentTarget.value)}
               disabled={editHometask.isLoading}
@@ -139,7 +142,7 @@ export const EditHometask = ({
             <select
               {...register("topicId")}
               id="topicId"
-              className={INPUT_SELECT}
+              className={styles.select}
               onChange={(e) => setTopicId(e.currentTarget.value)}
             >
               {topic ? (

@@ -1,11 +1,12 @@
 import { type Note } from "@prisma/client";
+import clsx from "clsx";
 import { UploadNote } from "components/common/UploadNote";
 import { env } from "env/client.mjs";
 import { Workspace } from "layouts/Workspace";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ACTION_BUTTON, CARD, NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type NoteItemProps = {
@@ -14,7 +15,7 @@ type NoteItemProps = {
 };
 
 const NoteItem = ({ userId, note }: NoteItemProps) => (
-  <div className={`${CARD} my-4 space-y-4`}>
+  <div className={clsx(styles.card, "my-4 space-y-4")}>
     <a
       className="text-xl text-center"
       href={`${env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/notes/${userId}/${note.id}`}
@@ -47,11 +48,14 @@ const Notes = () => {
   return (
     <Workspace>
       <div>
-        <h1 className={NOTIFICATION}>
+        <h1 className={styles.notification}>
           Here are your notes sorted by topics and dates created.
         </h1>
         <div className="flex items-center gap-2">
-          <Link href="/new/note" className={`${ACTION_BUTTON} w-full`}>
+          <Link
+            href="/new/note"
+            className={clsx(styles.actionButton, "w-full")}
+          >
             Take Note
           </Link>
           <UploadNote className="w-full" />
@@ -61,12 +65,12 @@ const Notes = () => {
           page.items.length > 0 ? (
             page.items.map((note) => <NoteItem userId={userId} note={note} />)
           ) : (
-            <p className={NOTIFICATION}>No hometasks yet.</p>
+            <p className={styles.notification}>No hometasks yet.</p>
           )
         )}
         {/* Pagination */}
         <button
-          className={ACTION_BUTTON}
+          className={styles.actionButton}
           onClick={() => notesQuery.fetchPreviousPage()}
           disabled={
             !notesQuery.hasPreviousPage || notesQuery.isFetchingPreviousPage

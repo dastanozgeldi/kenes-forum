@@ -1,5 +1,6 @@
 import { router } from "../trpc";
 import { hometaskRouter } from "./hometask";
+import { messageRouter } from "./message";
 import { noteRouter } from "./note";
 import { participantRouter } from "./participant";
 import { roomRouter } from "./room";
@@ -15,6 +16,7 @@ export const appRouter = router({
   school: schoolRouter,
   topic: topicRouter,
   user: userRouter,
+  message: messageRouter,
 });
 
 // export type definition of API

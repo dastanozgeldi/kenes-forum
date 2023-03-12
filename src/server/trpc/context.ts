@@ -1,9 +1,12 @@
 import { type inferAsyncReturnType } from "@trpc/server";
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
+import * as trpcNext from "@trpc/server/adapters/next";
+import { NodeHTTPCreateContextFnOptions } from "@trpc/server/adapters/node-http";
+import { IncomingMessage } from "http";
+import ws from "ws";
 
-import { getServerAuthSession } from "../common/get-server-auth-session";
 import { prisma } from "../db/client";
+import { getSession } from "next-auth/react";
 
 type CreateContextOptions = {
   session: Session | null;
@@ -25,11 +28,15 @@ export const createContextInner = async (opts: CreateContextOptions) => {
  * This is the actual context you'll use in your router
  * @link https://trpc.io/docs/context
  **/
-export const createContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts;
-
+export const createContext = async (
+  opts:
+    | trpcNext.CreateNextContextOptions
+    | NodeHTTPCreateContextFnOptions<IncomingMessage, ws>
+) => {
   // Get the session from the server using the unstable_getServerSession wrapper function
-  const session = await getServerAuthSession({ req, res });
+  const session = await getSession(opts);
+
+  console.log("createContext for", session?.user?.name ?? "unknown user");
 
   return await createContextInner({
     session,

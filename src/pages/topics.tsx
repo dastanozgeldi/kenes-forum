@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { CARD, NOTIFICATION } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 const Topics = () => {
@@ -8,11 +7,11 @@ const Topics = () => {
 
   return (
     <div className="max-w-[60ch] mx-auto">
-      <h1 className={NOTIFICATION}>
+      <h1 className={styles.notification}>
         Here is the list of all topics Kenes currently has. They categorize the
         subject of a room, making it easy for you to find what you need!
       </h1>
-      <div className={CARD}>
+      <div className={styles.card}>
         {data?.map((t: any) => (
           <Link
             href={`/feed/?topicId=${t.id}`}

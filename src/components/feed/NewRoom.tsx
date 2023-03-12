@@ -1,9 +1,10 @@
 import type { Topic } from "@prisma/client";
+import clsx from "clsx";
 import { Modal } from "components/common/Modal";
 import { useSession } from "next-auth/react";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ACTION_BUTTON, INPUT_SELECT, INPUT_TEXT } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type FormData = {
@@ -53,7 +54,7 @@ export const NewRoom = ({ isOpen, setIsOpen }: NewRoomProps) => {
             id="title"
             {...register("title")}
             type="text"
-            className={INPUT_TEXT}
+            className={styles.input}
             disabled={addRoom.isLoading}
           />
         </div>
@@ -66,7 +67,7 @@ export const NewRoom = ({ isOpen, setIsOpen }: NewRoomProps) => {
             id="description"
             {...register("description")}
             type="text"
-            className={INPUT_TEXT}
+            className={styles.input}
             disabled={addRoom.isLoading}
           />
         </div>
@@ -78,7 +79,7 @@ export const NewRoom = ({ isOpen, setIsOpen }: NewRoomProps) => {
           <select
             {...register("topic")}
             id="topic"
-            className={INPUT_SELECT}
+            className={styles.select}
             onChange={(e) => setTopicId(e.currentTarget.value)}
           >
             <option selected>Click to choose</option>
@@ -92,7 +93,7 @@ export const NewRoom = ({ isOpen, setIsOpen }: NewRoomProps) => {
         </div>
         {/* Submit Form */}
         <button
-          className={`${ACTION_BUTTON} my-4`}
+          className={clsx(styles.actionButton, "my-4")}
           type="submit"
           disabled={addRoom.isLoading}
         >

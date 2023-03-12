@@ -3,7 +3,7 @@ import { Modal } from "components/common/Modal";
 import type { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ACTION_BUTTON, DELETE_BUTTON, INPUT_SELECT, INPUT_TEXT } from "styles";
+import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
 type EditRoomProps = {
@@ -87,14 +87,14 @@ export const EditRoom = ({ data, topics, session, router }: EditRoomProps) => {
           <>
             <button
               disabled={data?.isPinned}
-              className={ACTION_BUTTON}
+              className={styles.actionButton}
               onClick={() => pinRoom.mutate({ roomId: id, isPinned })}
             >
               {data?.isPinned ? "Pinned" : "Pin"}
             </button>
             <button
               disabled={hasJoined}
-              className={ACTION_BUTTON}
+              className={styles.actionButton}
               onClick={() => joinRoom.mutate({ userId, roomId: id })}
             >
               {hasJoined ? "Joined" : "Join"}
@@ -103,11 +103,14 @@ export const EditRoom = ({ data, topics, session, router }: EditRoomProps) => {
         )}
         {userId === data?.userId && (
           <>
-            <button className={ACTION_BUTTON} onClick={() => setIsOpen(true)}>
+            <button
+              className={styles.actionButton}
+              onClick={() => setIsOpen(true)}
+            >
               Edit
             </button>
             <button
-              className={DELETE_BUTTON}
+              className={styles.deleteButton}
               onClick={() => deleteRoom.mutate({ id })}
             >
               Delete
@@ -125,7 +128,7 @@ export const EditRoom = ({ data, topics, session, router }: EditRoomProps) => {
             <input
               id="title"
               {...register("title")}
-              className={INPUT_TEXT}
+              className={styles.input}
               value={title}
               onChange={(e) => setTitle(e.currentTarget.value)}
               disabled={editRoom.isLoading}
@@ -139,7 +142,7 @@ export const EditRoom = ({ data, topics, session, router }: EditRoomProps) => {
             <input
               id="description"
               {...register("description")}
-              className={INPUT_TEXT}
+              className={styles.input}
               value={description}
               onChange={(e) => setDescription(e.currentTarget.value)}
               disabled={editRoom.isLoading}
@@ -153,7 +156,7 @@ export const EditRoom = ({ data, topics, session, router }: EditRoomProps) => {
             <select
               {...register("topicId")}
               id="topicId"
-              className={INPUT_SELECT}
+              className={styles.select}
               onChange={(e) => setTopicId(e.currentTarget.value)}
             >
               {topic ? (
