@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import RoomsSection from "components/feed/RoomsSection";
 import { Page } from "layouts/Page";
 import Link from "next/link";
-import { Topics } from "components/feed/Topics";
 import { Search } from "components/feed/Search";
 
 const Feed = () => {
@@ -27,8 +26,7 @@ const Feed = () => {
         </Link>
       </div>
       {/* Main Feed */}
-      <div className="my-8 block md:grid md:grid-cols-3">
-        <Topics />
+      <div className="my-8 max-w-[60ch] mx-auto">
         <RoomsSection session={session} />
       </div>
     </Page>

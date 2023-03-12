@@ -6,26 +6,26 @@ export const Topics = () => {
   const { data } = trpc.topic.getSome.useQuery({ limit: 5 });
 
   return (
-    <div className="hidden md:block w-[70%]">
-      <h1 className="text-2xl font-semibold text-center">Browse Topics</h1>
-      <ul>
+    <div className="hidden md:block space-y-3">
+      <h1 className="text-xl font-semibold px-4">Browse Topics</h1>
+      <ul className="overflow-y-auto h-[300px]">
         <Link
           href="/"
-          className="flex items-center justify-between my-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
+          className="flex items-center justify-between p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
         >
-          <span className="text-xl p-2">All</span>
+          <span className="p-2">All</span>
         </Link>
         {data?.map((t) => (
           <li
             key={t.id}
-            className="my-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
+            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
           >
             <Link
-              href={`?topicId=${t.id}`}
+              href={`/?topicId=${t.id}`}
               className="flex items-center justify-between"
             >
-              <span className="text-xl p-2">{t.name}</span>
-              <span className="text-xl px-2 rounded bg-gray-100 dark:bg-gray-800">
+              <span className="p-2">{t.name}</span>
+              <span className="px-2 rounded bg-gray-100 dark:bg-gray-800">
                 {t.rooms.length}
               </span>
             </Link>

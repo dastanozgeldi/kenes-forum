@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Avatar } from "components/common/Avatar";
 import { ToggleTheme } from "components/common/ToggleTheme";
+import { Topics } from "components/feed/Topics";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,9 +17,9 @@ type SidebarProps = {
 export const Sidebar = ({ mounted, links }: SidebarProps) => {
   const { data: session } = useSession();
   const icons = {
-    Feed: <FaHome size={24} />,
-    Workspace: <FaSuitcase size={24} />,
-    Consiliums: <FaVideo size={24} />,
+    Feed: <FaHome className="text-primary" size={24} />,
+    Workspace: <FaSuitcase className="text-primary" size={24} />,
+    Consiliums: <FaVideo className="text-primary" size={24} />,
   };
 
   const [isBigScreen, setIsBigScreen] = useState(false);
@@ -75,7 +76,7 @@ export const Sidebar = ({ mounted, links }: SidebarProps) => {
           )}
         </div>
       </div>
-      {/* <Topics /> */}
+      <Topics />
     </aside>
   );
 };
