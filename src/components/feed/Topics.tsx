@@ -10,7 +10,7 @@ export const Topics = () => {
       <h1 className="text-2xl font-semibold text-center">Browse Topics</h1>
       <ul>
         <Link
-          href="/feed"
+          href="/"
           className="flex items-center justify-between my-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:duration-300"
         >
           <span className="text-xl p-2">All</span>
@@ -21,7 +21,7 @@ export const Topics = () => {
             className="my-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:duration-300"
           >
             <Link
-              href={`/feed/?topicId=${t.id}`}
+              href={`?topicId=${t.id}`}
               className="flex items-center justify-between"
             >
               <span className="text-xl p-2">{t.name}</span>

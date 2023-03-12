@@ -14,7 +14,7 @@ const Topics = () => {
       <div className={styles.card}>
         {data?.map((t: any) => (
           <Link
-            href={`/feed/?topicId=${t.id}`}
+            href={`?topicId=${t.id}`}
             className="flex items-center justify-between px-2 w-full rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
           >
             <div className="flex items-center gap-2 p-2 m-2">{t.name}</div>

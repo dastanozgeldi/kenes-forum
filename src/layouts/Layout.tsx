@@ -13,7 +13,7 @@ export const poppins = Poppins({
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
   const links = [
-    { label: "Feed", href: "/feed", icon: <FaHome /> },
+    { label: "Feed", href: "/", icon: <FaHome /> },
     { label: "Workspace", href: "/workspace", icon: <FaSuitcase /> },
     { label: "Consiliums", href: "/consiliums", icon: <FaVideo /> },
   ];
