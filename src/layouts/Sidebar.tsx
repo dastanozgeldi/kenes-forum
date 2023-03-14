@@ -6,7 +6,7 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BiLogInCircle } from "react-icons/bi";
-import { FaHome, FaSuitcase, FaVideo } from "react-icons/fa";
+import { FaHome, FaRobot, FaSuitcase, FaVideo } from "react-icons/fa";
 import { Logo } from "./Logo";
 
 type SidebarProps = {
@@ -20,6 +20,7 @@ export const Sidebar = ({ mounted, links }: SidebarProps) => {
     Feed: <FaHome className="text-primary" size={24} />,
     Workspace: <FaSuitcase className="text-primary" size={24} />,
     Consiliums: <FaVideo className="text-primary" size={24} />,
+    AIChatBot: <FaRobot className="text-primary" size={24} />,
   };
 
   const [isBigScreen, setIsBigScreen] = useState(false);

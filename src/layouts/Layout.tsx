@@ -3,7 +3,6 @@ import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Poppins } from "@next/font/google";
 import { Sidebar } from "./Sidebar";
-import { FaSuitcase, FaHome, FaVideo } from "react-icons/fa";
 
 export const poppins = Poppins({
   variable: "--font-poppins",
@@ -14,9 +13,10 @@ export const poppins = Poppins({
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
   const links = [
-    { label: "Feed", href: "/", icon: <FaHome /> },
-    { label: "Workspace", href: "/workspace", icon: <FaSuitcase /> },
-    { label: "Consiliums", href: "/consiliums", icon: <FaVideo /> },
+    { label: "Feed", href: "/" },
+    { label: "Workspace", href: "/workspace" },
+    { label: "Consiliums", href: "http://localhost:3000/" },
+    { label: "AIChatBot", href: "/chatbot" },
   ];
 
   const [parent] = useAutoAnimate<HTMLDivElement>();

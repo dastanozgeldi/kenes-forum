@@ -8,7 +8,7 @@ export const Topics = () => {
   return (
     <div className="hidden md:block space-y-3">
       <h1 className="text-xl font-semibold px-4">Browse Topics</h1>
-      <ul className="overflow-y-auto h-[300px]">
+      <ul className="overflow-y-auto h-[250px]">
         <Link
           href="/"
           className="flex items-center justify-between p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 hover:duration-300"
