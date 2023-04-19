@@ -32,10 +32,7 @@ const Connections = () => {
 
   const id = session?.user?.id as string;
   const { data: user } = trpc.user.info.useQuery({ id });
-  const { data: connections } = trpc.user.connections.useQuery({
-    id,
-    schoolId: user?.schoolId || "",
-  });
+  const { data: connections } = trpc.user.connections.useQuery({ id });
 
   if (status === "loading") {
     return "Loading or not authenticated...";
@@ -44,7 +41,7 @@ const Connections = () => {
     <Workspace>
       <div className="w-full">
         <h1 className={styles.notification}>
-          Here are people from your school.
+          Here are people from your location.
         </h1>
         <div className="w-full">
           {connections?.map((connection) => (

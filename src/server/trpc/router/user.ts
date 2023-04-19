@@ -59,15 +59,13 @@ export const userRouter = router({
     .input(
       z.object({
         id: z.string().cuid(),
-        schoolId: z.string().uuid(),
       })
     )
     .query(async ({ ctx, input }) => {
-      const { id, schoolId } = input;
+      const { id } = input;
       return await ctx.prisma.user.findMany({
         where: {
           id: { not: id },
-          schoolId,
         },
         select: defaultUserSelect,
       });

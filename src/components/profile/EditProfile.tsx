@@ -1,4 +1,3 @@
-import type { School } from "@prisma/client";
 import { Modal } from "components/common/Modal";
 import { useSession } from "next-auth/react";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
@@ -9,7 +8,6 @@ import { trpc } from "utils/trpc";
 type FormData = {
   username: string;
   bio: string;
-  schoolId: string;
   grade: string;
 };
 
@@ -22,7 +20,6 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
   // States
   const [username, setUsername] = useState<string | null | undefined>(null);
   const [bio, setBio] = useState<string | null | undefined>(null);
-  const [schoolId, setSchoolId] = useState<string | null | undefined>(null);
   const [grade, setGrade] = useState<string | null | undefined>(null);
   // Form
   const { register, handleSubmit } = useForm<FormData>();
@@ -30,7 +27,6 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
   const { data: session } = useSession();
   const id = session?.user?.id as string;
   const { data: user } = trpc.user.info.useQuery({ id });
-  const { data: schools } = trpc.school.all.useQuery();
 
   const utils = trpc.useContext();
   const editProfile = trpc.user.edit.useMutation({
@@ -44,7 +40,7 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
     try {
       await editProfile.mutateAsync({
         id,
-        data: { username, bio, schoolId, grade },
+        data: { username, bio, grade },
       });
     } catch {}
   });
@@ -52,7 +48,6 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
   useEffect(() => {
     setUsername(user?.username);
     setBio(user?.bio);
-    setSchoolId(user?.schoolId);
     setGrade(user?.grade);
   }, []);
 
@@ -72,40 +67,6 @@ export const EditProfile = ({ isOpen, setIsOpen }: EditProfileProps) => {
             className={styles.input}
             value={username || ""}
             onChange={(e) => setUsername(e.currentTarget.value)}
-          />
-        </div>
-        {/* School */}
-        <div>
-          <label className="text-lg" htmlFor="schoolId">
-            School:
-          </label>
-          <select
-            {...register("schoolId")}
-            id="schoolId"
-            className={styles.select}
-            onChange={(e) => setSchoolId(e.currentTarget.value)}
-          >
-            <option selected>Choose a school</option>
-            {schools &&
-              schools.map((s: School) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
-                </option>
-              ))}
-          </select>
-        </div>
-        {/* Grade */}
-        <div>
-          <label className="text-lg" htmlFor="grade">
-            Grade:
-          </label>
-          <input
-            id="grade"
-            {...register("grade")}
-            className={styles.input}
-            value={grade || ""}
-            onChange={(e) => setGrade(e.currentTarget.value)}
-            disabled={editProfile.isLoading}
           />
         </div>
 
