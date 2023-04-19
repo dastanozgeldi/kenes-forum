@@ -210,7 +210,7 @@ export const AddMessageForm = ({
               value={message}
               disabled={!hasUserJoined}
               onChange={(e) => setMessage(e.target.value)}
-              className="bg-transparent outline-none flex-1 outline-0 resize-none max-h-max overflow-y-visible"
+              className="bg-transparent text-gray-800 dark:text-gray-100 outline-none flex-1 outline-0 resize-none max-h-max overflow-y-visible"
               rows={message.split(/\r|\n/).length}
               id="content"
               name="content"
