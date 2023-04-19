@@ -15,7 +15,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const links = [
     { label: "Feed", href: "/" },
     { label: "Workspace", href: "/workspace" },
-    { label: "Consiliums", href: "http://localhost:3000/" },
+    { label: "Consiliums", href: "http://kenes-consilium.vercel.app/" },
     { label: "AIChatBot", href: "/chatbot" },
   ];
 
