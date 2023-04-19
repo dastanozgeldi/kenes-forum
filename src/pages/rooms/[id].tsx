@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import NextError from "next/error";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useRef, useState } from "react";
 import { styles } from "styles";
 import { Page } from "layouts/Page";
 import { EditRoom } from "components/rooms/EditRoom";
@@ -28,93 +27,6 @@ const Participants = ({ roomId }: { roomId: string }) => {
             </Link>
           ))}
       </div>
-    </div>
-  );
-};
-
-const SentNotes = ({ roomId, userId }: { roomId: string; userId: string }) => {
-  const [file, setFile] = useState<any>();
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [uploadingStatus, setUploadingStatus] = useState<any>();
-
-  const { mutateAsync: createPresignedUrl } =
-    trpc.note.createPresignedUrl.useMutation();
-  const notesQuery = trpc.note.getNotesForRoom.useQuery({ roomId });
-
-  const selectFile = (e: any) => {
-    setFile(e.target.files[0]);
-  };
-
-  const uploadNote = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!file) return;
-    else if (file.size > 8_388_608) {
-      alert(
-        "Maximum file size is 8MB. Please compress or choose another file."
-      );
-      setFile(undefined);
-      return;
-    }
-
-    setUploadingStatus("Uploading the file to AWS S3");
-
-    const { url, fields }: { url: string; fields: any } =
-      (await createPresignedUrl({
-        roomId,
-        filename: file.name,
-      })) as any;
-
-    const data = {
-      ...fields,
-      "Content-Type": file.type,
-      file,
-    };
-
-    const formData = new FormData();
-    for (const name in data) {
-      formData.append(name, data[name]);
-    }
-
-    await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
-
-    setFile(undefined);
-
-    if (fileRef.current) {
-      fileRef.current.value = "";
-    }
-
-    notesQuery.refetch();
-  };
-
-  return (
-    <div className={clsx(styles.card, "my-2")}>
-      <h1 className="my-2 text-2xl font-semibold text-center">
-        Notes Sent - {notesQuery.data?.length}
-      </h1>
-      {notesQuery.data?.map((note) => (
-        <a
-          className={clsx(styles.card, "m-2, w-full text-left")}
-          href={`${env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/notes/${userId}/${note.id}`}
-        >
-          {note.filename}
-        </a>
-      ))}
-      <form
-        hidden={!userId}
-        className="border-t-[1px] w-full border-gray-700 p-4"
-        onSubmit={uploadNote}
-      >
-        <input ref={fileRef} type="file" onChange={(e) => selectFile(e)} />
-        {file && (
-          <button type="submit" className={clsx(styles.actionButton, "my-2")}>
-            Upload a File!
-          </button>
-        )}
-        {uploadingStatus && <p>{uploadingStatus}</p>}
-      </form>
     </div>
   );
 };
@@ -157,7 +69,6 @@ const ViewRoom = () => {
           session={session}
           router={router}
         />
-        <SentNotes roomId={room.id} userId={session?.user?.id as string} />
         <Messages roomId={room.id} session={session} />
       </div>
     </Page>

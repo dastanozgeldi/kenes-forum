@@ -1,7 +1,5 @@
-import { type Note } from "@prisma/client";
-import clsx from "clsx";
-import { UploadNote } from "components/common/UploadNote";
-import { env } from "env/client.mjs";
+import { type User } from "@prisma/client";
+import { Avatar } from "components/common/Avatar";
 import { Workspace } from "layouts/Workspace";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -9,82 +7,53 @@ import { useRouter } from "next/router";
 import { styles } from "styles";
 import { trpc } from "utils/trpc";
 
-type NoteItemProps = {
-  userId: string;
-  note: Note;
+type ConnectionItemProps = {
+  connection: User;
 };
 
-const NoteItem = ({ userId, note }: NoteItemProps) => (
-  <div className={clsx(styles.card, "my-4 space-y-4")}>
-    <a
-      className="text-xl text-center"
-      href={`${env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/notes/${userId}/${note.id}`}
-    >
-      {note.filename}
-    </a>
-    <p className="text-gray-500">{`${note.createdAt.toLocaleDateString()}, ${note.createdAt.toLocaleTimeString()}`}</p>
-  </div>
+const ConnectionItem = ({ connection }: ConnectionItemProps) => (
+  <Link
+    href={`/users/${connection.id}`}
+    className="flex items-center gap-4 p-4 my-4 rounded-xl border-[1px] border-gray-700 hover:border-gray-500 duration-300"
+  >
+    <Avatar src={connection.image} size={50} />
+    <a>{connection.name}</a>
+  </Link>
 );
 
-const Notes = () => {
-  const { data: session } = useSession();
-  const userId = session?.user?.id as string;
+const Connections = () => {
   const router = useRouter();
-  const { status } = useSession({
+  const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
       router.push("/api/auth/signin");
     },
   });
 
-  const notesQuery = trpc.note.infinite.useInfiniteQuery(
-    { limit: 5 },
-    {
-      getPreviousPageParam: (lastPage) => lastPage.nextCursor,
-    }
-  );
+  const id = session?.user?.id as string;
+  const { data: user } = trpc.user.info.useQuery({ id });
+  const { data: connections } = trpc.user.connections.useQuery({
+    id,
+    schoolId: user?.schoolId || "",
+  });
 
-  if (status === "loading") return "Loading or not authenticated...";
+  if (status === "loading") {
+    return "Loading or not authenticated...";
+  }
   return (
     <Workspace>
-      <div>
+      <div className="w-full">
         <h1 className={styles.notification}>
-          Here are your notes sorted by topics and dates created.
+          Here are people from your school.
         </h1>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/new/note"
-            className={clsx(styles.actionButton, "w-full")}
-          >
-            Take Note
-          </Link>
-          <UploadNote className="w-full" />
+        <div className="w-full">
+          {connections?.map((connection) => (
+            <ConnectionItem connection={connection} />
+          ))}
         </div>
-
-        {notesQuery.data?.pages.map((page, _) =>
-          page.items.length > 0 ? (
-            page.items.map((note) => <NoteItem userId={userId} note={note} />)
-          ) : (
-            <p className={styles.notification}>No hometasks yet.</p>
-          )
-        )}
-        {/* Pagination */}
-        <button
-          className={styles.actionButton}
-          onClick={() => notesQuery.fetchPreviousPage()}
-          disabled={
-            !notesQuery.hasPreviousPage || notesQuery.isFetchingPreviousPage
-          }
-        >
-          {notesQuery.isFetchingPreviousPage
-            ? "Loading more..."
-            : notesQuery.hasPreviousPage
-            ? "Load More"
-            : "Nothing more to load"}
-        </button>
       </div>
     </Workspace>
   );
 };
 
-export default Notes;
+export default Connections;

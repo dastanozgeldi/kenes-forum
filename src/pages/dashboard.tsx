@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/react";
-import { HometaskSection } from "components/hometasks/HometaskSection";
 import { UserInfo } from "components/profile/UserInfo";
 import { PinnedRooms } from "components/profile/PinnedRooms";
 import { Page } from "layouts/Page";
@@ -20,7 +19,7 @@ const Dashboard = () => {
       </div>
       <PinnedRooms />
       <div className="w-full xl:px-4">
-        <HometaskSection />
+        <PinnedRooms />
       </div>
     </Page>
   );

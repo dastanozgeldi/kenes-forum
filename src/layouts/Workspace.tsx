@@ -13,14 +13,14 @@ export const Workspace: FC<PropsWithChildren> = ({ children }) => (
       </Link>
 
       <Link
-        href="/workspace/hometasks"
+        href="/workspace"
         className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 hover:duration-300"
       >
         <IoHome className="text-gray-400 w-5 h-5" />
       </Link>
 
       <Link
-        href="/workspace/connections"
+        href="/workspace"
         className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 hover:duration-300"
       >
         <IoPerson className="text-gray-400 w-5 h-5" />
