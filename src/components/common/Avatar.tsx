@@ -1,7 +1,7 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import defaultAvatar from "assets/default-avatar.png";
 
-type AvatarProps = { src?: string | null; size: number };
+type AvatarProps = { src?: string | StaticImageData | null; size: number };
 
 export const Avatar = ({ src, size }: AvatarProps) => (
   <Image

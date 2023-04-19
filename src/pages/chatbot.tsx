@@ -3,6 +3,7 @@ import { IoSend } from "react-icons/io5";
 import { useSession } from "next-auth/react";
 import { Avatar } from "components/common/Avatar";
 import { FaRobot } from "react-icons/fa";
+import user from "assets/user.png"
 
 enum Creator {
   Me = 0,
@@ -21,12 +22,12 @@ interface InputProps {
   disabled: boolean;
 }
 
-const ChatMessage = ({ text, from, author }: MessageProps) => {
+const ChatMessage = ({ text, from }: MessageProps) => {
   return (
     <>
       {from == Creator.Me && (
         <div className="bg-white dark:bg-gray-900 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
-          <Avatar size={40} src={author.image} />
+          <Avatar size={40} src={user} />
           <p className="text-gray-700 dark:text-gray-200">{text}</p>
         </div>
       )}
